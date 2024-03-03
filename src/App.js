@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Details from "./Components/Details";
+import Homepage from "./Components/Homepage";
 
-function App() {
+const App = () => {
+  const [fetchData, setFetchData] = useState([]);
+  // console.log("in app",fetchData); 
+  function fetchDataUpdater(data) {
+    setFetchData(data);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Homepage fetchDataUpdater={fetchDataUpdater}/>} />
+        <Route path="/details/:pincode" element={<Details fetchData={fetchData}/>} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
